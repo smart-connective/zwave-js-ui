@@ -3,7 +3,10 @@ name: Build pkg armv7 S&C Version
 env:
   ZwaveJsVersion: sc-v15.6.0-v0
 
-on: release
+on:
+  release:
+    types:
+      - created
 
 jobs:
   build:
@@ -28,8 +31,15 @@ jobs:
           npm run build
 
       - name: Clone zwave-js fork
+        uses: actions/checkout@v4
+        with:
+          repository: https://github.com/smart-connective/zwave-js.git
+          ref: $ZwaveJsVersion
+          path: "./zwave-js"
+          fetch-depth: 1
+
+      - name: Build zwave-js fork
         run: |
-          git clone --branch $ZwaveJsVersion --depth 1 https://github.com/smart-connective/zwave-js.git
           cd zwave-js
           corepack enable
           yarn install --mode=skip-build
