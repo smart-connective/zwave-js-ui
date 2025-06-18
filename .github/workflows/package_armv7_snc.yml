@@ -1,4 +1,4 @@
-name: Build pkg armv7
+name: Build pkg armv7 S&C Version
 
 on:
   release:
@@ -15,33 +15,35 @@ jobs:
         node-version: [20.x] # NB: when pkg-fetch bumps binaries, this must be updated
     
     steps:
+      - uses: actions/checkout@v4
+
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
           node-version: ${{ matrix.node-version }}
           cache: "npm"
 
+      - name: Install and pre-build
+        run: |
+          npm ci
+          npm run build
+
       - name: Clone zwave-js fork
         run: |
           git clone https://github.com/smart-connective/zwave-js.git
           cd zwave-js
+          corepack enable
+          yarn install --mode=skip-build
           cd packages/eslint-plugin
           yarn build
           cd ../..
           yarn install
           yarn build
 
-      - name: Clone zwave-js-ui fork
-        run: |
-          git clone https://github.com/smart-connective/zwave-js-ui.git
-          cd zwave-js-ui
-          npm ci
-          npm run build
-
       - name: Patch zwave-js-ui with compiled zwave-js files
         run: |
-          cp zwave-js/packages/zwave-js/build/cjs/lib/node/CCHandlers/NotificationCC.js zwave-js-ui/node_modules/zwave-js/build/cjs/lib/node/CCHandlers/NotificationCC.js
-          cp zwave-js/packages/zwave-js/build/cjs/lib/driver/Driver.js zwave-js-ui/node_modules/zwave-js/build/cjs/lib/driver/Driver.js
+          cp zwave-js/packages/zwave-js/build/cjs/lib/node/CCHandlers/NotificationCC.js node_modules/zwave-js/build/cjs/lib/node/CCHandlers/NotificationCC.js
+          cp zwave-js/packages/zwave-js/build/cjs/lib/driver/Driver.js node_modules/zwave-js/build/cjs/lib/driver/Driver.js
 
       - name : Remove zwave-js fork
         run: |
