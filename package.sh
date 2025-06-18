@@ -159,20 +159,20 @@ mkdir store -p
 if [ ! -z "$1" ]; then
 
 	if [ "$ARCH" = "aarch64" ] || [ "$ARCH" = "arm64" ]; then
-		echo "## Create zip file $APP-v$VERSION-linux-arm64"
-		zip -r $APP-v$VERSION-linux-arm64.zip store $APP
+		echo "## Create zip file $APP-linux-arm64"
+		zip -r $APP-linux-arm64.zip store $APP
 	elif [ "$ARCH" = "armv7" ]; then
-		echo "## Create zip file $APP-v$VERSION-linux-armv7"
-		zip -r $APP-v$VERSION-linux-armv7.zip store $APP
+		echo "## Create zip file $APP-linux-armv7"
+		zip -r $APP-linux-armv7.zip store $APP
 	else
-		echo "## Create zip file $APP-v$VERSION-win"
-		zip -r $APP-v$VERSION-win.zip store $APP-win.exe
+		echo "## Create zip file $APP-win"
+		zip -r $APP-win.zip store $APP-win.exe
 
-		echo "## Create zip file $APP-v$VERSION-linux"
-		zip -r $APP-v$VERSION-linux.zip store $APP-linux
+		echo "## Create zip file $APP-linux"
+		zip -r $APP-linux.zip store $APP-linux
 	fi
 
 else
 	echo "## Create zip file $APP-v$VERSION"
-	zip -r $APP-v$VERSION.zip store $APP
+	zip -r $APP.zip store $APP
 fi
