@@ -33,8 +33,9 @@ jobs:
       - name: Clone zwave-js fork
         uses: actions/checkout@v4
         with:
-          repository: https://github.com/smart-connective/zwave-js.git
-          ref: $ZwaveJsVersion
+          repository: smart-connective/zwave-js
+          token: ${{ secrets.GH_PAT }}
+          ref: ${{ env.ZwaveJsVersion }}
           path: "./zwave-js"
           fetch-depth: 1
 
