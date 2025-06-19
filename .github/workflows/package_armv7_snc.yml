@@ -52,8 +52,10 @@ jobs:
 
       - name: Patch zwave-js-ui with compiled zwave-js files
         run: |
-          cp zwave-js/packages/zwave-js/build/cjs/lib/node/CCHandlers/NotificationCC.js node_modules/zwave-js/build/cjs/lib/node/CCHandlers/NotificationCC.js
+          cat zwave-js/packages/zwave-js/build/cjs/lib/driver/Driver.js | grep "Smart and Connective"
           cp zwave-js/packages/zwave-js/build/cjs/lib/driver/Driver.js node_modules/zwave-js/build/cjs/lib/driver/Driver.js
+          cat node_modules/zwave-js/build/cjs/lib/driver/Driver.js | grep "Smart and Connective"
+          cp zwave-js/packages/zwave-js/build/cjs/lib/node/CCHandlers/NotificationCC.js node_modules/zwave-js/build/cjs/lib/node/CCHandlers/NotificationCC.js
 
       - name : Remove zwave-js fork
         run: |
@@ -73,6 +75,7 @@ jobs:
           # Rebuild .node modules for amv7
           run: |
             cd /app
+            cat node_modules/zwave-js/build/cjs/lib/driver/Driver.js | grep "Smart and Connective"
             npm rebuild
 
       - name: Build for armv7
