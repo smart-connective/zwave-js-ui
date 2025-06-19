@@ -52,10 +52,15 @@ jobs:
 
       - name: Patch zwave-js-ui with compiled zwave-js files
         run: |
+          echo "Verification 1/3 : Verifiyng zwave-js build has Smart and Connective logger"
           cat zwave-js/packages/zwave-js/build/cjs/lib/driver/Driver.js | grep "Smart and Connective"
           cp zwave-js/packages/zwave-js/build/cjs/lib/driver/Driver.js node_modules/zwave-js/build/cjs/lib/driver/Driver.js
+          echo "Verification 2/3 : Verifiyng zwave-js-ui build node-modules has Smart and Connective logger"
           cat node_modules/zwave-js/build/cjs/lib/driver/Driver.js | grep "Smart and Connective"
           cp zwave-js/packages/zwave-js/build/cjs/lib/node/CCHandlers/NotificationCC.js node_modules/zwave-js/build/cjs/lib/node/CCHandlers/NotificationCC.js
+          echo "copying esm files aswell"
+          cp zwave-js/packages/zwave-js/build/esm/lib/driver/Driver.js node_modules/zwave-js/build/esm/lib/driver/Driver.js
+          cp zwave-js/packages/zwave-js/build/esm/lib/node/CCHandlers/NotificationCC.js node_modules/zwave-js/build/esm/lib/node/CCHandlers/NotificationCC.js
 
       - name : Remove zwave-js fork
         run: |
@@ -75,6 +80,7 @@ jobs:
           # Rebuild .node modules for amv7
           run: |
             cd /app
+            echo "Verification 3/3 : Verifiyng armv7 docker has Smart and Connective logger"
             cat node_modules/zwave-js/build/cjs/lib/driver/Driver.js | grep "Smart and Connective"
             npm rebuild
 
