@@ -1,7 +1,7 @@
 name: Build pkg armv7 S&C Version
 
 env:
-  ZwaveJsVersion: sc-v15.6.0-v0
+  ZwaveJsVersion: sc-v15.6.0-v1
 
 on:
   release:
