@@ -91,10 +91,15 @@ jobs:
           npm run pkg -- --bundle --skip-build --arch=armv7
 
       - name: Rename artifact with version
+        env:
+          VERSION: ${{ github.event.release.tag_name || env.ZwaveJsVersion }}
+        shell: bash
         run: |
-          VERSION=${{ env.ZwaveJsVersion }}
+          set -euo pipefail
+          shopt -p nullglob >/dev/null 2>&1 || true
+          shopt -s nullglob
           for f in ./build/pkg/*.zip; do
-            mv "$f" "${f%.zip}-${VERSION}.zip"
+            mv -v "$f" "${f%.zip}-${VERSION}.zip"
           done
 
       - name: Upload artifacts
