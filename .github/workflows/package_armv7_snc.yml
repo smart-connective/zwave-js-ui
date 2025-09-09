@@ -90,6 +90,13 @@ jobs:
           export PKG_NODE_PATH=$(pwd)/built-v20.11.0-linux-armv7
           npm run pkg -- --bundle --skip-build --arch=armv7
 
+      - name: Rename artifact with version
+        run: |
+          VERSION=${{ env.ZwaveJsVersion }}
+          for f in ./build/pkg/*.zip; do
+            mv "$f" "${f%.zip}-${VERSION}.zip"
+          done
+
       - name: Upload artifacts
         if: github.event_name == 'workflow_dispatch'
         uses: actions/upload-artifact@v4
