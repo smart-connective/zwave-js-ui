@@ -14,6 +14,7 @@ async function pathExists(path) {
 const outputDir = 'build'
 
 function cleanPkgJson(json) {
+	delete json.type
 	delete json.devDependencies
 	delete json['release-it']
 	delete json.optionalDependencies

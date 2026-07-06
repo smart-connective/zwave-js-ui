@@ -75,7 +75,7 @@ jobs:
           dockerRunArgs: |
             --volume "${PWD}:/app"
 
-          base_image: '--platform=linux/arm/v7 arm32v7/node:20-bookworm'
+          base_image: '--platform=linux/arm/v7 arm32v7/node:22-bullseye'
 
           # Rebuild .node modules for amv7
           run: |
@@ -86,8 +86,9 @@ jobs:
 
       - name: Build for armv7
         run: |
-          curl https://github.com/yao-pkg/pkg-binaries/releases/download/node20/built-v20.11.0-linux-armv7 -LOJ
-          export PKG_NODE_PATH=$(pwd)/built-v20.11.0-linux-armv7
+          curl https://github.com/yao-pkg/pkg-binaries/releases/download/node20/node-v20.19.5-linux-armv7 -LOJ
+          chmod +x node-v20.19.5-linux-armv7
+          export PKG_NODE_PATH=$(pwd)/node-v20.19.5-linux-armv7
           npm run pkg -- --bundle --skip-build --arch=armv7
 
       - name: Rename artifact with version

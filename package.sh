@@ -55,8 +55,8 @@ else
 fi
 
 pack() {
-	echo executing: pkg . --out-path $PKG_FOLDER --options experimental-require-module -t $1 $2
-	npx pkg . --out-path $PKG_FOLDER --options experimental-require-module -t $1 $2
+	echo executing: pkg . --out-path $PKG_FOLDER -t $1 $2
+	npx pkg . --out-path $PKG_FOLDER -t $1 $2
 }
 
 echo "## Architecture: $ARCH"
