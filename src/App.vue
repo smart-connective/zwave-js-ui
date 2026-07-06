@@ -305,7 +305,7 @@
 						}"
 					>
 						Made with &#10084;&#65039; by
-						<strong class="ml-1 mr-2">Daniel Lando</strong>-
+						<strong class="ml-1 mr-2">Daniel Lando</strong> - (Smart&amp;Connective custom version sc-v11.21.1-v0 based on Zwave JS sc-v15.25.1-v1 )
 						Enjoying it?&nbsp;
 						<a
 							target="_blank"
